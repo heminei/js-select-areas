@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- Bootstrap CSS -->
+        <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+        <link href="../dist/js-select-areas.css" rel="stylesheet" />
+        <script src="../dist/js-select-areas.js"></script>
+
+        <title>Hello, world!</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="card">
+                <div class="card-header"></div>
+                <div class="card-body">
+                    <img class="img-fluid js-select-areas" src="labrador-retriever.jpg" alt="" />
+                </div>
+            </div>
+        </div>
+        <script>
+            (function () {
+                var jsSelectArea = new JSSelectAreas(document.querySelector(".js-select-areas"), {
+                    multiple: true,
+                });
+
+                jsSelectArea.on("area.created", function (element) {
+                    console.log("area.created", element);
+                });
+                jsSelectArea.on("area.resized", function (element) {
+                    console.log("area.resized", element);
+
+                    console.log("getSelections", jsSelectArea.getSelections());
+                });
+                jsSelectArea.on("area.resizing", function (element) {
+                    // console.log("area.resizing", element);
+                });
+                jsSelectArea.on("area.moving", function (element) {
+                    // console.log("area.moving", element);
+                });
+                jsSelectArea.on("area.removed", function (element) {
+                    console.log("area.removed", element);
+                });
+
+                console.log("jsSelectArea", jsSelectArea);
+            })();
+        </script>
+    </body>
+</html>

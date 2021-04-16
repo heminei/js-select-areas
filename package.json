@@ -1,0 +1,21 @@
+{
+  "name": "js-select-areas",
+  "version": "1.0.0",
+  "description": "Plugin that let you select multiple areas of an image, move them and resize them",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heminei/js-select-areas.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heminei/js-select-areas/issues"
+  },
+  "homepage": "https://github.com/heminei/js-select-areas#readme",
+  "devDependencies": {
+    "typescript": "^4.2.4",
+    "bootstrap": "^4.6.0"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,95 @@
+.js-select-areas-holder {
+  position: relative;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.js-select-areas-holder .js-select-areas-area {
+  position: absolute;
+  border: 1px dashed rgba(255, 255, 255, 0.6);
+  cursor: move;
+}
+
+.js-select-areas-holder .js-select-areas-area.js-select-areas-drawing, .js-select-areas-holder .js-select-areas-area.js-select-areas-moving {
+  z-index: 100;
+}
+
+.js-select-areas-holder .js-select-areas-area.js-select-areas-drawing .js-select-areas-area-resize-handler, .js-select-areas-holder .js-select-areas-area.js-select-areas-moving .js-select-areas-area-resize-handler {
+  display: none;
+}
+
+.js-select-areas-holder .js-select-areas-area.js-select-areas-area-selected {
+  border-color: #fff;
+  z-index: 100;
+}
+
+.js-select-areas-holder .js-select-areas-area.js-select-areas-area-selected .js-select-areas-area-resize-handler {
+  border-color: #fff;
+}
+
+.js-select-areas-holder .js-select-areas-area-resize-handler {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  width: 6px;
+  height: 6px;
+}
+
+.js-select-areas-holder .js-select-areas-area-resize-handler.js-select-areas-area-tl {
+  left: -3px;
+  top: -3px;
+  cursor: nw-resize;
+}
+
+.js-select-areas-holder .js-select-areas-area-resize-handler.js-select-areas-area-tr {
+  top: -3px;
+  right: -3px;
+  cursor: ne-resize;
+}
+
+.js-select-areas-holder .js-select-areas-area-resize-handler.js-select-areas-area-tc {
+  top: -3px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  cursor: n-resize;
+}
+
+.js-select-areas-holder .js-select-areas-area-resize-handler.js-select-areas-area-ml {
+  top: 50%;
+  left: -3px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  cursor: e-resize;
+}
+
+.js-select-areas-holder .js-select-areas-area-resize-handler.js-select-areas-area-mr {
+  top: 50%;
+  right: -3px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  cursor: w-resize;
+}
+
+.js-select-areas-holder .js-select-areas-area-resize-handler.js-select-areas-area-bl {
+  bottom: -3px;
+  left: -3px;
+  cursor: sw-resize;
+}
+
+.js-select-areas-holder .js-select-areas-area-resize-handler.js-select-areas-area-bc {
+  bottom: -3px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  cursor: s-resize;
+}
+
+.js-select-areas-holder .js-select-areas-area-resize-handler.js-select-areas-area-br {
+  bottom: -3px;
+  right: -3px;
+  cursor: se-resize;
+}
+/*# sourceMappingURL=js-select-areas.css.map */
