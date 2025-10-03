@@ -278,6 +278,67 @@ class JSSelectAreas {
         return selections;
     }
 
+    addSelectionOriginal(selection: { x: number; y: number; width: number; height: number }): HTMLElement {
+        // Remove current selection if multiple selections are not allowed
+        if (this.options.multiple === false) {
+            this.holder.querySelectorAll(".js-select-areas-area").forEach((element) => {
+                element.classList.remove("js-select-areas-area-selected");
+            });
+        }
+
+        // Calculate ratio for image coordinates
+        let ratio = 1;
+        if (this.element instanceof HTMLImageElement) {
+            ratio = this.element.naturalWidth / this.element.width;
+        }
+
+        // Create new area element
+        const area = this.generateArea();
+
+        // Convert from original coordinates to displayed coordinates
+        let x = selection.x / ratio;
+        let y = selection.y / ratio;
+        let width = selection.width / ratio;
+        let height = selection.height / ratio;
+
+        // Apply constraints to width and height
+        width = Math.max(width, parseFloat(this.options.area.minWidth));
+        height = Math.max(height, parseFloat(this.options.area.minHeight));
+
+        if (typeof this.options.area.maxWidth === "number") {
+            width = Math.min(width, this.options.area.maxWidth);
+        }
+        if (typeof this.options.area.maxHeight === "number") {
+            height = Math.min(height, this.options.area.maxHeight);
+        }
+
+        // Apply constraints to position to keep area within holder bounds
+        x = Math.max(0, Math.min(x, this.holder.offsetWidth - width));
+        y = Math.max(0, Math.min(y, this.holder.offsetHeight - height));
+
+        // Adjust width/height if they exceed holder boundaries
+        if (x + width > this.holder.offsetWidth) {
+            width = this.holder.offsetWidth - x;
+        }
+        if (y + height > this.holder.offsetHeight) {
+            height = this.holder.offsetHeight - y;
+        }
+
+        // Set area position and dimensions
+        area.style.left = x + "px";
+        area.style.top = y + "px";
+        area.style.width = width + "px";
+        area.style.height = height + "px";
+
+        // Mark as selected
+        area.classList.add("js-select-areas-area-selected");
+
+        // Add to holder
+        this.holder.appendChild(area);
+
+        return area;
+    }
+
     addSelection(selection: { x: number; y: number; width: number; height: number }): HTMLElement {
         // Remove current selection if multiple selections are not allowed
         if (this.options.multiple === false) {
@@ -289,9 +350,15 @@ class JSSelectAreas {
         // Create new area element
         const area = this.generateArea();
 
+        // Use coordinates as-is (displayed coordinates, no ratio conversion)
+        let x = selection.x;
+        let y = selection.y;
+        let width = selection.width;
+        let height = selection.height;
+
         // Apply constraints to width and height
-        let width = Math.max(selection.width, parseFloat(this.options.area.minWidth));
-        let height = Math.max(selection.height, parseFloat(this.options.area.minHeight));
+        width = Math.max(width, parseFloat(this.options.area.minWidth));
+        height = Math.max(height, parseFloat(this.options.area.minHeight));
 
         if (typeof this.options.area.maxWidth === "number") {
             width = Math.min(width, this.options.area.maxWidth);
@@ -301,8 +368,8 @@ class JSSelectAreas {
         }
 
         // Apply constraints to position to keep area within holder bounds
-        let x = Math.max(0, Math.min(selection.x, this.holder.offsetWidth - width));
-        let y = Math.max(0, Math.min(selection.y, this.holder.offsetHeight - height));
+        x = Math.max(0, Math.min(x, this.holder.offsetWidth - width));
+        y = Math.max(0, Math.min(y, this.holder.offsetHeight - height));
 
         // Adjust width/height if they exceed holder boundaries
         if (x + width > this.holder.offsetWidth) {

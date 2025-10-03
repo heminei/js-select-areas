@@ -79,17 +79,37 @@ var areas = jsSelectArea.getAreas();
 
 ### `addSelection({ x, y, width, height })`
 
-Programmatically adds a new selection area at the specified position and dimensions. The method automatically applies constraints (min/max width/height) and ensures the area stays within boundaries.
+Programmatically adds a new selection area using **original image coordinates** (for images, this uses the natural/full-size image dimensions). The method automatically converts these to displayed coordinates, applies constraints (min/max width/height), and ensures the area stays within boundaries.
 
 ```javascript
-// Add a selection area at position (50, 50) with size 100x80
+// For images: Add a selection using original image coordinates
+// If the image is 2000x1500 pixels but displayed at 1000x750, 
+// these coordinates will be automatically scaled down
 var area = jsSelectArea.addSelection({ 
-    x: 50, 
+    x: 100,      // Original image coordinates
+    y: 100, 
+    width: 400,  // Original image size
+    height: 300 
+});
+```
+
+**Note:** This method uses the same coordinate system as the `originalX`, `originalY`, `originalWidth`, `originalHeight` values returned by `getSelections()`.
+
+### `addSelectionOriginal({ x, y, width, height })`
+
+Programmatically adds a new selection area using **displayed/screen coordinates** (pixel coordinates as they appear on screen). The method applies constraints (min/max width/height) and ensures the area stays within boundaries.
+
+```javascript
+// Add a selection using screen coordinates (pixels as displayed)
+var area = jsSelectArea.addSelectionOriginal({ 
+    x: 50,      // Screen pixel coordinates
     y: 50, 
-    width: 100, 
+    width: 100, // Screen pixel size
     height: 80 
 });
 ```
+
+**Note:** This method uses the same coordinate system as the `x`, `y`, `width`, `height` values returned by `getSelections()`.
 
 ### `destroy()`
 
