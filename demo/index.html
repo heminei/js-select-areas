@@ -16,7 +16,9 @@
     <body>
         <div class="container">
             <div class="card">
-                <div class="card-header"></div>
+                <div class="card-header">
+                    <button id="addRandomArea" class="btn btn-primary">Add Random Area</button>
+                </div>
                 <div class="card-body">
                     <img class="img-fluid js-select-areas" src="assets/labrador-retriever.jpg" alt="" />
                 </div>
@@ -47,6 +49,26 @@
                 });
 
                 console.log("jsSelectArea", jsSelectArea);
+
+                // Add random area button functionality
+                document.getElementById("addRandomArea").addEventListener("click", function () {
+                    // Get the holder dimensions (image dimensions)
+                    const holder = document.querySelector(".js-select-areas-holder");
+                    const maxWidth = holder.offsetWidth;
+                    const maxHeight = holder.offsetHeight;
+
+                    // Generate random dimensions (between 50 and 200 pixels)
+                    const width = Math.floor(Math.random() * 150) + 50;
+                    const height = Math.floor(Math.random() * 150) + 50;
+
+                    // Generate random position ensuring the area fits within bounds
+                    const x = Math.floor(Math.random() * (maxWidth - width));
+                    const y = Math.floor(Math.random() * (maxHeight - height));
+
+                    // Add the selection
+                    const area = jsSelectArea.addSelection({ x, y, width, height });
+                    console.log("Random area added:", { x, y, width, height });
+                });
             })();
         </script>
     </body>

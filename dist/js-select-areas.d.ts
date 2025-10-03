@@ -35,6 +35,12 @@ declare class JSSelectAreas {
     getAreas(): NodeListOf<HTMLElement>;
     getSelectedArea(): HTMLElement | null;
     getSelections(): JSSelectAreasSelectionItem[];
+    addSelection(selection: {
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+    }): HTMLElement;
     on(name: string, callback: Function): void;
     trigger(name: string, ...params: any[]): void;
     destroy(): void;
